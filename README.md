@@ -19,15 +19,22 @@ This is the same directory into which you placet the `.p12` files.
 
 -----------add by jlk------------
 根据这条命令 （http://www.raywenderlich.com/zh-hans/23066/ios-6-passbook-%E5%85%A5%E9%97%A8-12）
+```sh
 openssl smime -binary -sign -certfile WWDR.pem -signer passcertificate.pem -inkey passkey.pem -in manifest.json -out signature -outform DER -passin pass:12345
+```
 
 需要三个.pem文件
+
 wwdr.pem --- 直接导出
-另外两个通过前面说的.p12文件使用下面的命令生成
+
+另外两个通过前面说的`.p12`文件使用下面的命令生成
+```sh
 openssl pkcs12 -in Certificates.p12 -clcerts -nokeys -out passcertificate.pem -passin pass:
 openssl pkcs12 -in Certificates.p12 -nocerts -out passkey.pem -passin pass: -passout pass:12345
-
+```
+```sh
 template.keys("./public/key/pass", "12345");                   //这句中 12345 就是对应 上面命令中的证书密码 “12345”
+```
 
 # Start with a template
 
